@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RepositoryRow from '../RepositoryRow';
 import HintMessage from '../HintMessage';
+import Paginator from '../Paginator';
 
 /**
  * Muestra los repositorios en una lista.
@@ -9,7 +10,7 @@ import HintMessage from '../HintMessage';
 class RepositoryList extends React.PureComponent {
 
   static propTypes = {
-    repositories: PropTypes.arrayOf(PropTypes.object).isRequired,
+    data: PropTypes.arrayOf(PropTypes.object).isRequired,
     loading: PropTypes.bool.isRequired,
     queried: PropTypes.bool.isRequired,
     search: PropTypes.string.isRequired
@@ -19,7 +20,7 @@ class RepositoryList extends React.PureComponent {
    */
 
    renderMessage() {
-    let text = '', l = this.props.repositories.length;
+    let text = '', l = this.props.data.length;
 
     if(this.props.loading) {
         text = <span>Searching results for <b>{this.props.search}</b></span>
@@ -36,7 +37,7 @@ class RepositoryList extends React.PureComponent {
    }
 
    renderTable() {
-      if(this.props.repositories.length === 0 ) {return null;}
+      if(this.props.data.length === 0 ) {return null;}
 
       return <table className="u-full-width">
         <thead>
@@ -48,7 +49,7 @@ class RepositoryList extends React.PureComponent {
           </tr>
         </thead>
         <tbody>
-            {this.props.repositories.map(repo => 
+            {this.props.data.map(repo => 
               <RepositoryRow repo={repo} key={repo.id} />
               )}
         </tbody>
@@ -65,4 +66,4 @@ class RepositoryList extends React.PureComponent {
 }
 
 // Export the class
-export default RepositoryList;
+export default Paginator(RepositoryList);
