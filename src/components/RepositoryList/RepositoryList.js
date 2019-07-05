@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import RepositoryRow from '../RepositoryRow';
 
 /**
@@ -7,7 +8,7 @@ import RepositoryRow from '../RepositoryRow';
 class RepositoryList extends React.PureComponent {
 
   static propTypes = {
-    repositories: React.PropTypes.arrayOf(PropTypes.object).isRequired,
+    repositories: PropTypes.arrayOf(PropTypes.object).isRequired,
     loading: PropTypes.bool.isRequired,
     queried: PropTypes.bool.isRequired,
     search: PropTypes.string.isRequired
