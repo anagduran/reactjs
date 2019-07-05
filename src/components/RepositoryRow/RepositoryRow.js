@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Componentes
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter } from 'react-router-dom';
 import {FaStar} from 'react-icons/fa';
 import {FaCodepen} from 'react-icons/fa';
 import GithubAvatar from '../GithubAvatar';
@@ -29,9 +29,13 @@ class RepositoryRow extends React.PureComponent {
       <td><GithubAvatar author={ repo.owner } /></td>
       <td><FaStar /> { repo.stargazers_count }</td>
       <td><FaCodepen /> { repo.forks_count }</td>
-      <td className="align-right">
-        <Link className="button button-primary" to={ `/${repo.full_name}`}>Releases</Link>
-      </td>
+     
+          <td className="align-right">
+          <BrowserRouter>
+            <Link className="button button-primary" to={ `/${repo.full_name}`}>Releases</Link>
+          </BrowserRouter>
+          </td>
+     
     </tr>
   }
 }

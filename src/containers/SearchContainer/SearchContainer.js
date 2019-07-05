@@ -60,7 +60,7 @@ class SearchContainer extends React.Component {
     console.log('submit: ' + value);
 
     setTimeout (()=> {
-        this.setState({loading: false, queried: true, results: this.stubData()});
+        this.setState({search: value, loading: false, queried: true, results: this.stubData()});
     }, 2000);
   }
 
