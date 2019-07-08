@@ -63,4 +63,4 @@ class ReleaseList extends React.PureComponent {
   }
 }
 // Export the class
-export default Paginator(ReleaseList);
+export default Paginator (ReleaseList);
