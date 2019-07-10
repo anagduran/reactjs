@@ -2,19 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Router, Route, hashHistory, BrowserRouter} from 'react-router-dom';
 
 
 // Importamos los componentes
-//import Header from './components/Header';
- import SearchContainer from './containers/SearchContainer';
-// import DetailsContainer from './containers/DetailsContainer';
+
+import DetailsContainer from './containers/DetailsContainer';
 
 
 import * as serviceWorker from './serviceWorker';
+import BaseContainer from './containers/BaseContainer/BaseContainer';
+import About from './components/About';
+
 ReactDOM.render(
-   // <Header />,
-     <SearchContainer />,
-    // <DetailsContainer />,
+    <BrowserRouter>
+      <Route path='/' component = {BaseContainer}/>
+      <Route path=':user/:repo' component={DetailsContainer} />
+      <Route path='about' component = {About}/>
+
+
+    </BrowserRouter>,
     document.getElementById('root')
   );
 

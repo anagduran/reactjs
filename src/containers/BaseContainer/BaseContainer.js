@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 // Importamos los componentes
 import Header from '../../components/Header';
 import SearchContainer from '../SearchContainer';
-import { Link, IndexLink } from 'react-router';
+import { Link, NavLink } from 'react-router-dom';
 
 /**
  * Este es el container base de nuestra aplicación. Si recibe un elemento en
@@ -26,8 +26,8 @@ class BaseContainer extends React.Component {
     return <main className="container">
       <Header />
       <nav className="Navigation">
-        <IndexLink to="/" className="Link" activeClassName="Link--active">Home</IndexLink>
-        <Link to="/about" className="Link" activeClassName="Link--active">About</Link>
+        <Link to="/" className="Link">Home</Link>
+        <Link to="/about" className="Link">About</Link>
       </nav>
       { this.props.children || <SearchContainer /> }
     </main>;
