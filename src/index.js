@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Router, Route, hashHistory, BrowserRouter} from 'react-router-dom';
+import store from './store';
+import {Provider} from 'react-redux';
 
 
 // Importamos los componentes
@@ -15,13 +17,16 @@ import BaseContainer from './containers/BaseContainer/BaseContainer';
 import About from './components/About';
 
 ReactDOM.render(
+  <Provider store= {store}>
     <BrowserRouter>
       <Route path='/' component = {BaseContainer}/>
       <Route path=':user/:repo' component={DetailsContainer} />
       <Route path='about' component = {About}/>
 
 
-    </BrowserRouter>,
+    </BrowserRouter>
+  </Provider>,
+    
     document.getElementById('root')
   );
 

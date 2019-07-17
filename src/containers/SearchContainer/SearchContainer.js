@@ -1,16 +1,23 @@
 import React, { PropTypes } from 'react';
 
+//Actions
+import {startSearch, successSearch} from '../../actions/actions';
+
 // Importamos los componentes
-import Header from '../../components/Header';
+// import Header from '../../components/Header';
 import SearchForm from '../../components/SearchForm'
 import RepositoryList from '../../components/RepositoryList';
+
+//React-redux
+
+import {connect} from 'react-redux';
 
 /**
  * Muestra un buscador, así como la lista de resultados.
  */
 class SearchContainer extends React.Component {
 
-    constructor(props) {
+    /*constructor(props) {
         super(props);
 
         //binds
@@ -22,7 +29,7 @@ class SearchContainer extends React.Component {
             search: '',
             queried: false
         }
-    }
+    }*/
 
 
   /**
@@ -54,13 +61,13 @@ class SearchContainer extends React.Component {
     ]
   }
 
-  onSubmit(value) {
-    this.setState({loading: true});
-
-    console.log('submit: ' + value);
+  onSubmit = (value) => {
+    // this.setState({loading: true});
+    this.props.dispatch(startSearch(value)); 
 
     setTimeout (()=> {
-        this.setState({search: value, loading: false, queried: true, results: this.stubData()});
+      this.props.dispatch(successSearch(this.stubData()));
+       // this.setState({search: value, loading: false, queried: true, results: this.stubData()});
     }, 2000);
   }
 
@@ -69,11 +76,17 @@ class SearchContainer extends React.Component {
    */
   render() {
     return <main className="container">
-    <SearchForm onSubmit = {this.onSubmit} search = {this.state.search}/>
-    <RepositoryList data = {this.state.results} loading={this.state.loading} queried={this.state.queried} search={this.state.search}/>
+    <SearchForm onSubmit = {this.onSubmit} search = {this.props.search}/>
+    <RepositoryList data = {this.props.results} loading={this.props.loading} queried={this.props.queried} search={this.props.search}/>
     </main>
   }
 }
 
+const mapStateToProps = state => {
+  let {search, loading, results, queried} = state;
+
+  return {search, loading, results, queried};
+}
+
 // Exportamos
-export default SearchContainer;
+export default connect(mapStateToProps)(SearchContainer);
