@@ -12,3 +12,20 @@ export const successSearch = results => {
         results
     }
 }
+
+export const searchRepositories = value => 
+    dispatch => {
+        dispatch(startSearch(value)); 
+
+        fetch(`https://api.github.com/search/repositories?q=${ value }`)
+          .then(res => {
+              return res.json();
+          })
+          .then(json =>{
+           dispatch(successSearch(json.items))
+          })
+          .catch(err => {
+            console.log(err);
+          })
+    }
+

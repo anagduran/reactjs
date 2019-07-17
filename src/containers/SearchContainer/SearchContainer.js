@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 
 //Actions
-import {startSearch, successSearch} from '../../actions/actions';
+// import {startSearch, successSearch} from '../../actions/actions';
+import {searchRepositories} from '../../actions/actions';
 
 // Importamos los componentes
 // import Header from '../../components/Header';
@@ -65,9 +66,9 @@ class SearchContainer extends React.Component {
 
   onSubmit = (value) => {
     // this.setState({loading: true});
-    this.props.dispatch(startSearch(value)); 
+    this.props.dispatch(searchRepositories(value)); 
 
-    fetch(`https://api.github.com/search/repositories?q=${ value }`)
+    /*fetch(`https://api.github.com/search/repositories?q=${ value }`)
       .then(res => {
           return res.json();
       })
@@ -76,7 +77,7 @@ class SearchContainer extends React.Component {
       })
       .catch(err => {
         console.log(err);
-      })
+      })*/
 
     /*setTimeout (()=> {
       this.props.dispatch(successSearch(this.stubData()));
