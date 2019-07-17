@@ -36,7 +36,7 @@ class SearchContainer extends React.Component {
    * Datos falsos. Los utilizamos en desarrollo hasta que leamos los datos de
    * la API.
    */
-  stubData() {
+  /*stubData() {
     let repo = {
       full_name: 'My Repository',
       owner: {
@@ -59,16 +59,29 @@ class SearchContainer extends React.Component {
       Object.assign({}, repo),
       Object.assign({}, repo)
     ]
-  }
+  }*/
+
+  
 
   onSubmit = (value) => {
     // this.setState({loading: true});
     this.props.dispatch(startSearch(value)); 
 
-    setTimeout (()=> {
+    fetch(`https://api.github.com/search/repositories?q=${ value }`)
+      .then(res => {
+          return res.json();
+      })
+      .then(json =>{
+        this.props.dispatch(successSearch(json.items))
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+    /*setTimeout (()=> {
       this.props.dispatch(successSearch(this.stubData()));
        // this.setState({search: value, loading: false, queried: true, results: this.stubData()});
-    }, 2000);
+    }, 2000);*/
   }
 
   /**

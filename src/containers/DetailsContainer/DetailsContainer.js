@@ -58,9 +58,20 @@ class DetailsContainer extends React.Component {
   componentDidMount(){
       this.setState({loading: true});
 
-      setTimeout(()=> {
+      fetch(`https://api.github.com/repos/${this.repoName}/releases`)
+        .then( res=>{
+          return res.json();
+        })
+        .then(json => {
+          this.setState({
+            loading: false,
+            releases: json
+          })
+        })
+
+      /*setTimeout(()=> {
           this.setState({loading: false, releases: this.stubData()});
-      },1000)
+      },1000)*/
   }
 
   //Devuelve el nombre del repo
